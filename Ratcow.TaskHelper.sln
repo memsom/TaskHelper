@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ratcow.TaskHelper", "Ratcow.TaskHelper\Ratcow.TaskHelper.csproj", "{CD905E65-4D81-4DCD-ADF8-6BAA190872A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ratcow.TaskHelper.Tests", "Ratcow.TaskHelper.Tests\Ratcow.TaskHelper.Tests.csproj", "{B858F174-87A1-47E8-835F-DFBB49030873}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD905E65-4D81-4DCD-ADF8-6BAA190872A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD905E65-4D81-4DCD-ADF8-6BAA190872A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD905E65-4D81-4DCD-ADF8-6BAA190872A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD905E65-4D81-4DCD-ADF8-6BAA190872A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B858F174-87A1-47E8-835F-DFBB49030873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B858F174-87A1-47E8-835F-DFBB49030873}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B858F174-87A1-47E8-835F-DFBB49030873}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B858F174-87A1-47E8-835F-DFBB49030873}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
