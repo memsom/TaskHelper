@@ -30,16 +30,11 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Ratcow.TaskHelper
 {
-
-
     /// <summary>
     /// Simple disposable task wrapper with cancellation
     /// </summary>
@@ -47,9 +42,11 @@ namespace Ratcow.TaskHelper
     {
         protected CancellationTokenSource cancellationSource;
         protected CancellationToken cancellationToken;
-        protected Task task;
+        protected Task task;        
         protected object syncObject = new object();
-        protected object stopped = new object();
+        protected object stopped = false;
+
+        protected bool isCancelled = false;
 
         /// <summary>
         /// Is the Task running?
@@ -69,12 +66,12 @@ namespace Ratcow.TaskHelper
         {
             get
             {
-                if(task == null)
+                if (task != null)
                 {
-                    return true;
+                    isCancelled = (task?.IsCanceled ?? true) || cancellationToken.IsCancellationRequested;
                 }
 
-                return task.IsCanceled || cancellationToken.IsCancellationRequested;
+                return isCancelled;
             }
         }
 
@@ -89,7 +86,7 @@ namespace Ratcow.TaskHelper
                         return true;
                     }
 
-                    return (bool)stopped || task.IsCanceled;
+                    return (bool)stopped || (task?.IsCanceled ?? true);
                 }
             }
         }
@@ -120,8 +117,7 @@ namespace Ratcow.TaskHelper
                         }
                         catch (AggregateException ae)
                         {
-                            var oce = ae.InnerException as OperationCanceledException;
-                            if (oce == null)
+                            if (!(ae.InnerException is OperationCanceledException oce))
                             {
                                 lock (stopped)
                                 {
@@ -136,32 +132,6 @@ namespace Ratcow.TaskHelper
                     });
                 }
             }
-        }
-
-        /// <summary>
-        /// Waits indefinately for the task to complete
-        /// </summary>
-        public void Wait()
-        {
-            task.Wait();
-        }
-
-        /// <summary>
-        /// Waits for a task for a specific timeout in miliseconds.
-        /// 
-        /// If cancelTask is true, the task is torn down on an 
-        /// unsuccessful wait.        
-        /// </summary>
-        public bool Wait(int timeout, bool cancelTask = false)
-        {
-            var result = task.Wait(timeout);
-
-            if (!result && cancelTask)
-            {
-                Stop();
-            }
-
-            return result;
         }
 
         /// <summary>
@@ -190,7 +160,7 @@ namespace Ratcow.TaskHelper
                     stopped = false;
                 }
             }
-        }
+        }        
 
         /// <summary>
         /// Override this and add in the task code to execute
@@ -238,7 +208,7 @@ namespace Ratcow.TaskHelper
         // This code added to correctly implement the disposable pattern.
         public virtual void Dispose()
         {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            // Do not change this code. Put clean-up code in Dispose(bool disposing) above.
             Dispose(true);
         }
 

@@ -29,15 +29,34 @@
  *
  */
 
-namespace Ratcow.TaskHelper.Tests
+namespace Ratcow.TaskHelper
 {
-    public class PeriodicTestTask: PeriodicTask
+    public class WaitableTaskWrapper : TaskWrapper
     {
-        public int Counter = 0;
-
-        protected override void ExecuteTaskIteration()
+        /// <summary>
+        /// Waits indefinitely for the task to complete
+        /// </summary>
+        public void Wait()
         {
-            Counter++;
+            task.Wait();
+        }
+
+        /// <summary>
+        /// Waits for a task for a specific timeout in milliseconds.
+        /// 
+        /// If cancelTask is true, the task is torn down on an 
+        /// unsuccessful wait.        
+        /// </summary>
+        public bool Wait(int timeout, bool cancelTask = false)
+        {
+            var result = task.Wait(timeout);
+
+            if (!result && cancelTask)
+            {
+                Stop();
+            }
+
+            return result;
         }
     }
 }

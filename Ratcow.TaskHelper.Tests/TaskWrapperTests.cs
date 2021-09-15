@@ -86,7 +86,7 @@ namespace Ratcow.TaskHelper.Tests
         [TestMethod]
         public void TaskWrapper_BasicTask_TestWithWait()
         {
-            var task = new BasicTask();
+            var task = new BasicWaitableTask();
             task.Input.AddRange(new string[] { "one", "two", "three", "four", "five" });
 
             task.Run();
@@ -104,7 +104,7 @@ namespace Ratcow.TaskHelper.Tests
         [TestMethod]
         public void TaskWrapper_BasicSumTask_TestWithWait()
         {
-            var task = new BasicSumTask();
+            var task = new BasicWaitableSumTask();
             task.Input.AddRange(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
 
             task.Run();
@@ -119,7 +119,7 @@ namespace Ratcow.TaskHelper.Tests
         [TestMethod]
         public void TaskWrapper_BasicTask_TestWithWaitTimeout()
         {
-            var task = new BasicTask();
+            var task = new BasicWaitableTask();
             task.Input.AddRange(new string[] { "one", "two", "three", "four", "five" });
 
             task.Run();
@@ -138,7 +138,7 @@ namespace Ratcow.TaskHelper.Tests
         [TestMethod]
         public void TaskWrapper_BasicSumTask_TestWithWaitTimeout()
         {
-            var task = new BasicSumTask();
+            var task = new BasicWaitableSumTask();
             task.Input.AddRange(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
 
             task.Run();
