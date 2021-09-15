@@ -29,15 +29,30 @@
  *
  */
 
+using System.Collections.Generic;
+
 namespace Ratcow.TaskHelper.Tests
 {
-    public class PeriodicTestTask: PeriodicTask
+    /// <summary>
+    /// Simple test task - sums values
+    /// </summary>
+    class BasicWaitableSumTask : WaitableTaskWrapper
     {
-        public int Counter = 0;
-
-        protected override void ExecuteTaskIteration()
+        public BasicWaitableSumTask()
         {
-            Counter++;
+            Input = new List<int>();
+            Output = 0;
         }
+
+        protected override void ExecuteTaskLoop()
+        {
+            foreach (var item in Input)
+            {
+                Output += item;
+            }
+        }
+
+        public List<int> Input { get; private set; }
+        public int Output { get; private set; }
     }
 }

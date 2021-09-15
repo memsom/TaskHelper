@@ -36,7 +36,7 @@ namespace Ratcow.TaskHelper.Tests
     /// <summary>
     /// Simple bad task - loops forever until cancelled
     /// </summary>
-    class BadTask : TaskWrapper
+    class BadTask : WaitableTaskWrapper
     {
         protected override void ExecuteTaskLoop()
         {

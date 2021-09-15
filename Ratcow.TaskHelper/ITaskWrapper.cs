@@ -37,8 +37,5 @@ namespace Ratcow.TaskHelper
 
         void Dispose();
         void Run();
-
-        void Wait();
-        bool Wait(int timeout, bool cancelTask = false);
     }
 }

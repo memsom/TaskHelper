@@ -37,7 +37,7 @@ namespace Ratcow.TaskHelper
     /// This is basically a Timer, but using a task and without the event
     /// based interface.
     /// </summary>
-    public class PeriodicTask: TaskWrapper
+    public class PeriodicTask: WaitableTaskWrapper
     {
         public int WaitInMilliseconds { get; set; }
 
